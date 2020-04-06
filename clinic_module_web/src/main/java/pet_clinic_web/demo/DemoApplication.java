@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = {"kss.springframework"})
-//@EntityScan("kss.springframework.petclinic.model")
-//@EnableJpaRepositories("kss.springframework.petclinic.repositories")
+@ComponentScan(basePackages = {"kss.petclinic.clinic_module_data.initializer"})
+@EntityScan("kss.petclinic.clinic_module_data.model")
+@EnableJpaRepositories("kss.petclinic.clinic_module_data.repositories")
 public class DemoApplication {
 
     public static void main(String[] args) {

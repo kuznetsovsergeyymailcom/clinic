@@ -3,10 +3,11 @@ package pet_clinic_web.demo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequestMapping("/")
 @Controller
-public class MainController {
+public class IndexController {
 
-    @RequestMapping("/")
+    @RequestMapping({"", "/", "/index", "/index.html"})
     public String index(){
         return "index";
     }
