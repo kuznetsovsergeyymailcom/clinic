@@ -1,5 +1,6 @@
 package kss.petclinic.clinic_module_data.services.springdatajpa;
 
+import kss.petclinic.clinic_module_data.exceptions.NotFoundException;
 import kss.petclinic.clinic_module_data.model.Owner;
 import kss.petclinic.clinic_module_data.repositories.OwnerRepository;
 import kss.petclinic.clinic_module_data.services.OwnerService;
@@ -27,7 +28,9 @@ public class OwnerSDJpaService implements OwnerService {
 
     @Override
     public Owner findById(Long id) {
-        return ownerRepository.findById(id).orElse(null);
+        Owner owner = ownerRepository.findById(id).orElse(null);
+
+        return owner;
     }
 
     @Override

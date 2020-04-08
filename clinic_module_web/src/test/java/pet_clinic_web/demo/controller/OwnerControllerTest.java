@@ -1,5 +1,7 @@
 package pet_clinic_web.demo.controller;
 
+import kss.petclinic.clinic_module_data.exceptions.NotFoundException;
+import kss.petclinic.clinic_module_data.exceptions.NumberFormatException;
 import kss.petclinic.clinic_module_data.model.Owner;
 import kss.petclinic.clinic_module_data.services.OwnerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +18,7 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -72,5 +75,35 @@ class OwnerControllerTest {
         mockMvc.perform(get("/owners/error"))
                 .andExpect(view().name("notimplemented"));
         verifyNoInteractions(ownerService);
+    }
+
+    @Test
+    void notImplemented() {
+    }
+
+    @Test
+    void showOwnerNotFound() throws Exception {
+        Owner owner = ownerService.findById(5l);
+        when(ownerService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/owners/5"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void showOwnerWrongFormat() throws Exception {
+
+//        when(ownerService.findById(any())).thenThrow(NumberFormatException.class);
+
+        mockMvc.perform(get("/owners/one"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void findOwners() throws Exception {
+       mockMvc.perform(get("/owners/find"))
+                .andExpect(status().isOk())
+               .andExpect(view().name("/owners/index"));
+
     }
 }
