@@ -24,22 +24,7 @@ public class OwnerController {
     @RequestMapping({"", "/", "/index", "/index.html"})
     public String listOfOwners(Owner owner, Model model, BindingResult bindingResult){
 
-//        if(owner.getLastName() == null){
-//            owner.setLastName("");
-//        }
-
-        if(bindingResult.hasErrors()){
-//            model.addAttribute("errors", "no owners found with name: " + owner.getFirstName());
-            bindingResult.rejectValue("lastName", "notFound", "not found");
-            return  "/owners/find";
-        }
-
-        if(owner != null){
-            Owner byLastName = ownerService.findByLastName(owner.getLastName());
-            model.addAttribute("owners", byLastName);
-        }else {
-            model.addAttribute("owners", ownerService.findAll());
-        }
+        model.addAttribute("owners", ownerService.findAll());
 
         return "/owners/index";
     }
@@ -70,7 +55,7 @@ public class OwnerController {
     @GetMapping("/find")
     public String findOwners(Model model){
         model.addAttribute("owner", Owner.builder().build());
-        return "/owners/index";
+        return "/owners/ownerDetails";
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
