@@ -3,11 +3,13 @@ package kss.petclinic.clinic_module_data.initializer;
 import kss.petclinic.clinic_module_data.model.*;
 import kss.petclinic.clinic_module_data.services.*;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
+//@Profile({"dev", "prod"})
 public class DataLoader implements CommandLineRunner {
 
     private final VetService vetService;

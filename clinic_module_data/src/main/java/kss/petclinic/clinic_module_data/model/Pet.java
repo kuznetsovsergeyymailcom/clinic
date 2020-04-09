@@ -1,5 +1,6 @@
 package kss.petclinic.clinic_module_data.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Pet extends BaseEntity{
     private Owner owner;
     @Column(name = "birth_date")
     private LocalDate localDate;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 
