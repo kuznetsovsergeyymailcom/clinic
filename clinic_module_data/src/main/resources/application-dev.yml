@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kss_dev
-    username: kss_user_dev
-    password: 123
+    username: *
+    password: *
     platform: mysql
   jpa:
     hibernate:
